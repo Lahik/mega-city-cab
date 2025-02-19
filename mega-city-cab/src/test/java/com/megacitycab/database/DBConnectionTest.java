@@ -2,6 +2,8 @@ package com.megacitycab.database;
 
 import static org.junit.Assert.*;
 import java.sql.Connection;
+import java.sql.SQLException;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -10,7 +12,7 @@ public class DBConnectionTest {
 	private static Connection connection;
 	
 	@BeforeClass
-	public static void setUp() {
+	public static void setUp() throws SQLException {
 		connection = DBConnectionFactory.getConnection();
 	}
 	

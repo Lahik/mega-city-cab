@@ -4,14 +4,5 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
-  <servlet>
-  	<servlet-name>LoginController</servlet-name>
-  	<display-name>LoginController</display-name>
-  	<description></description>
-  	<servlet-class>com.megacitycab.controller.LoginController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>LoginController</servlet-name>
-  	<url-pattern>/LoginController</url-pattern>
-  </servlet-mapping>
+
 </web-app>

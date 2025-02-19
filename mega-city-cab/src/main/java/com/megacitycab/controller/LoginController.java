@@ -1,16 +1,23 @@
 package com.megacitycab.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.megacitycab.model.User;
+import com.megacitycab.service.UserService;
+import com.megacitycab.util.PasswordHasher;
+import com.megacitycab.validation.UsernameValidator;
+
 /**
  * Servlet implementation class LoginController
  */
-@WebServlet("/")
+@WebServlet("/login")
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,16 +33,38 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+		String username = request.getParameter("username").trim();
+	    String password = request.getParameter("password");
 
+	    UserService userService = new UserService();
+	    UsernameValidator usernameValidator = new UsernameValidator();
+	    
+	    if(!usernameValidator.validate(username)) {
+	    	request.setAttribute("messages", List.of(usernameValidator.getErrorMessage()));
+        	request.setAttribute("messageType", "error");
+
+	        request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
+	        return;
+	    }
+	    
+	    if(userService.loginAttempt(username, password)) {
+	    	User user = userService.getUserByUsername(username);
+	        request.getSession().setAttribute("user", user);
+
+	        response.sendRedirect(request.getContextPath() + "/");
+	    } else {
+	        request.setAttribute("username", username);
+	        request.setAttribute("messages", List.of("Invalid Credentials!"));
+        	request.setAttribute("messageType", "error");
+
+	        request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
+	    }
+	}
 }

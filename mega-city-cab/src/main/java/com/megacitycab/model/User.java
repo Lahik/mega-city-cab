@@ -28,6 +28,14 @@ public class User {
         this.password = password;
     }
     
+    public User(String name, String address, String nic, String telephone, String username) {
+        this.name = name;
+        this.address = address;
+        this.nic = nic;
+        this.telephone = telephone;
+        this.username = username;
+    }
+    
     public User(String username, String password) {
         this.username = username;
         this.password = password;
@@ -83,6 +91,10 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+    
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
 

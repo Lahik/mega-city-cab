@@ -96,4 +96,64 @@ public class UserDAO {
         return false;
     }
 
+    public boolean isUsernameTaken(String username, int userId) {
+        String query = "SELECT COUNT(*) FROM users WHERE username = ? AND id != ?";
+        
+        try (Connection conn = DBConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, username);
+            stmt.setInt(2, userId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    public boolean updateUser(User user) {
+        String query = "UPDATE users SET name = ?, address = ?, nic = ?, telephone = ?, username = ? WHERE id = ?";
+        
+        try (Connection conn = DBConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, user.getName());
+            stmt.setString(2, user.getAddress());
+            stmt.setString(3, user.getNic());
+            stmt.setString(4, user.getTelephone());
+            stmt.setString(5, user.getUsername());
+            stmt.setInt(6, user.getId());
+
+            int rowsUpdated = stmt.executeUpdate();
+            return rowsUpdated > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    public boolean updateUserPassword(User user) {
+        String query = "UPDATE users SET password = ? WHERE id = ?";
+
+        try (Connection conn = DBConnectionFactory.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, user.getPassword());
+            pstmt.setInt(2, user.getId());
+
+            int rowsUpdated = pstmt.executeUpdate();
+            return rowsUpdated > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }

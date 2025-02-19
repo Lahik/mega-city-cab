@@ -26,4 +26,16 @@ public class UserService {
     public boolean isUsernameTaken(String username) {
     	return userDAO.isUsernameTaken(username);
     }
+    
+    public boolean isUsernameTaken(String username, int userId) {
+        return userDAO.isUsernameTaken(username, userId);
+    }
+
+    public boolean updateUserProfile(User user) {
+        return userDAO.updateUser(user);
+    }
+    
+    public boolean updateUserPassword(User user) {
+    	return userDAO.updateUserPassword(user);
+    }
 }

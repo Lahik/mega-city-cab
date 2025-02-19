@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.megacitycab.model.User;
 import com.megacitycab.service.UserService;
@@ -16,17 +17,17 @@ import com.megacitycab.service.ValidationService;
 import com.megacitycab.util.PasswordHasher;
 import com.megacitycab.validation.PasswordValidator;
 
-					/**
- * Servlet implementation class RegisterController
+/**
+ * Servlet implementation class ProfileController
  */
-@WebServlet("/register")
-public class RegisterController extends HttpServlet {
+@WebServlet("/profile")
+public class ProfileController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegisterController() {
+    public ProfileController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,27 +36,33 @@ public class RegisterController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/profile.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("user") == null) {
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
+
+        User loggedInUser = (User) session.getAttribute("user");
+        int userId = loggedInUser.getId();
+		
 		String name = request.getParameter("name").trim();
         String address = request.getParameter("address").trim();
         String nic = request.getParameter("nic").trim();
         String telephone = request.getParameter("telephone").trim();
         String username = request.getParameter("username").trim();
-        String password = request.getParameter("password");
-        String confirmPassword = request.getParameter("confirm_password");
         
         boolean isValid = true;
         List<String> errorMessages = new ArrayList<String>();
 
         ValidationService validationService = new ValidationService();
-        PasswordValidator passwordValidator = new PasswordValidator(); 
+        UserService userService = new UserService();
         
         if (!validationService.validate("nic", nic, null)) {
             errorMessages.add(validationService.getErrorMessage("nic"));
@@ -72,61 +79,39 @@ public class RegisterController extends HttpServlet {
             isValid = false;
         }
 
-        if (!passwordValidator.confirmPassword(password, confirmPassword)) {
-        	errorMessages.add("Passwords does not match");
-            isValid = false;
-        }
-
         if (!validationService.validate("sanitization", name, null) || 
             !validationService.validate("sanitization", address, null)) {
             errorMessages.add(validationService.getErrorMessage("sanitization"));
             isValid = false;
         }
+        
+        if (userService.isUsernameTaken(username, userId)) {
+            errorMessages.add("Username already taken!");
+            isValid = false;
+        }
 
         if (isValid) {
-        	String hashedPassword = PasswordHasher.hashPassword(password);
+            loggedInUser.setName(name);
+            loggedInUser.setAddress(address);
+            loggedInUser.setNic(nic);
+            loggedInUser.setTelephone(telephone);
+            loggedInUser.setUsername(username);
 
-        	UserService userService = new UserService();
-        	if(userService.isUsernameTaken(username)) {
-        		request.setAttribute("messages", List.of("Username already taken!"));
-            	request.setAttribute("messageType", "error");
-            	
-            	request.setAttribute("name", name);
-            	request.setAttribute("address", address);
-            	request.setAttribute("nic", nic);
-            	request.setAttribute("telephone", telephone);
-            	
-            	request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
-            	return;
-        	}
-        	
-            User user = new User(name, address, nic, telephone, username, hashedPassword);
-            
-            boolean registrationSuccessful = userService.registerUser(user);
+            boolean updateSuccess = userService.updateUserProfile(loggedInUser);
 
-            if (registrationSuccessful) {
-            	User userWithID = userService.getUserByUsername(username);
-            	request.getSession().setAttribute("user", userWithID);
-            	
-                response.sendRedirect(request.getContextPath() + "/");
+            if (updateSuccess) {
+                session.setAttribute("user", loggedInUser);
+                request.setAttribute("messages", List.of("Profile updated successfully!"));
+                request.setAttribute("messageType", "success");
             } else {
-            	request.setAttribute("messages", List.of("Registration failed. Try again Later."));
-            	request.setAttribute("messageType", "error");
-            	
-            	request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
+                request.setAttribute("messages", List.of("Failed to update profile. Please try again later."));
+                request.setAttribute("messageType", "error");
             }
         } else {
-        	request.setAttribute("name", name);
-        	request.setAttribute("username", username);
-        	request.setAttribute("address", address);
-        	request.setAttribute("nic", nic);
-        	request.setAttribute("telephone", telephone);
-        	
-        	request.setAttribute("messages", errorMessages);
-        	request.setAttribute("messageType", "error");
-        	
-        	request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
+            request.setAttribute("messages", errorMessages);
+            request.setAttribute("messageType", "error");
         }
-	}
 
+        request.getRequestDispatcher("/WEB-INF/views/profile.jsp").forward(request, response);
+	}
 }

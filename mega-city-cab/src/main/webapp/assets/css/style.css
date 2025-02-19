@@ -282,6 +282,8 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 2rem;
+    padding-inline: 10px;
 
     .login-box {
         width: 30rem;
@@ -335,8 +337,8 @@ header {
         }
         
         .button {
-        	width: 40%;
-        	font-size: 1.5rem;
+        	width: 100%;
+        	font-size: 1.6rem;
         }
     }
 }
@@ -514,6 +516,12 @@ header {
 	         margin: 0 15px;
 	      }
 	   }
+ 	}
+ 	
+ 	.login-container {
+ 		flex-direction: column;
+ 		margin-block: 100px;
+ 		min-height: 100vh;
  	}
 }
 

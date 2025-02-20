@@ -11,10 +11,9 @@
 <body>
 
 	<jsp:include page="/WEB-INF/components/navbar.jsp" />
-	
 	<jsp:include page="/WEB-INF/components/toast.jsp" />
 
-
+	
 	
 	<script src="<%= request.getContextPath() %>/assets/js/script.js"></script>
 </body>

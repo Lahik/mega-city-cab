@@ -11,7 +11,7 @@
 
                <div class="nav-links hover-underline-animation">
                    <div class="nav-link">
-                       <a href="/">Home</a>
+                       <a href="<%= request.getContextPath() %>">Home</a>
                    </div>
                    <div class="nav-link">
                        <a href="<%= request.getContextPath() %>/booking">Bookings</a>

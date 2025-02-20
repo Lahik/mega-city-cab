@@ -422,18 +422,10 @@ header {
     .fa-xmark-circle {
         color: red;
     }
-
-    .fa-exclamation-circle {
-        color: orange;
-    }
   }
 
   .success::after {
       background-color: green;
-  }
-
-  .invalid::after {
-      background-color: orange;
   }
 
   .error::after {

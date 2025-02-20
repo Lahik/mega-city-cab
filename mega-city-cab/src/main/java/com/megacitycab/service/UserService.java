@@ -1,14 +1,14 @@
 package com.megacitycab.service;
 
 import com.megacitycab.model.User;
-import com.megacitycab.dao.UserDAO;
+import com.megacitycab.dao.UserDAOImpl;
 
 public class UserService {
     
-    private UserDAO userDAO;
+    private UserDAOImpl userDAO;
     
     public UserService() {
-        this.userDAO = new UserDAO();
+        this.userDAO = new UserDAOImpl();
     }
     
     public boolean registerUser(User user) {
@@ -20,7 +20,7 @@ public class UserService {
     }
     
     public User getUserByUsername(String username) {
-        return userDAO.getUserByUsername(username);
+        return userDAO.getModelByUsername(username);
     }
 
     public boolean isUsernameTaken(String username) {
@@ -32,10 +32,10 @@ public class UserService {
     }
 
     public boolean updateUserProfile(User user) {
-        return userDAO.updateUser(user);
+        return userDAO.updateProfile(user);
     }
     
     public boolean updateUserPassword(User user) {
-    	return userDAO.updateUserPassword(user);
+    	return userDAO.updatePassword(user);
     }
 }

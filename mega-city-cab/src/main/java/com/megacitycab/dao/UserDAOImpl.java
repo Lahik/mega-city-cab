@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class UserDAOImpl implements UserDAO{
 
 	@Override
-    public boolean save(User user) {
+    public boolean insertUser(User user) {
         String query = "INSERT INTO users (name, address, nic, telephone, username, password) VALUES (?, ?, ?, ?, ?, ?)";
         
         try (Connection conn = DBConnectionFactory.getConnection();
@@ -34,7 +34,7 @@ public class UserDAOImpl implements UserDAO{
     }
     
 	@Override
-    public boolean credentialValidation(String username, String password) {
+    public boolean validateCredentials(String username, String password) {
         String query = "SELECT password FROM users WHERE username = ?";
         
         try (Connection conn = DBConnectionFactory.getConnection();
@@ -55,7 +55,7 @@ public class UserDAOImpl implements UserDAO{
     }
     
 	@Override
-    public User getModelByUsername(String username) {
+    public User findUserByUsername(String username) {
         String query = "SELECT * FROM users WHERE username = ?";
         try (Connection conn = DBConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -122,7 +122,7 @@ public class UserDAOImpl implements UserDAO{
     }
     
 	@Override
-    public boolean updateProfile(User user) {
+    public boolean updateUserDetails(User user) {
         String query = "UPDATE users SET name = ?, address = ?, nic = ?, telephone = ?, username = ? WHERE id = ?";
         
         try (Connection conn = DBConnectionFactory.getConnection();
@@ -145,7 +145,7 @@ public class UserDAOImpl implements UserDAO{
     }
     
 	@Override
-    public boolean updatePassword(User user) {
+    public boolean changeUserPassword(User user) {
         String query = "UPDATE users SET password = ? WHERE id = ?";
 
         try (Connection conn = DBConnectionFactory.getConnection();

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.megacitycab.model.User;
-import com.megacitycab.service.UserService;
+import com.megacitycab.service.UserServiceImpl;
 import com.megacitycab.service.ValidationService;
 import com.megacitycab.util.PasswordHasher;
 import com.megacitycab.validation.PasswordValidator;
@@ -86,7 +86,7 @@ public class RegisterController extends HttpServlet {
         if (isValid) {
         	String hashedPassword = PasswordHasher.hashPassword(password);
 
-        	UserService userService = new UserService();
+        	UserServiceImpl userService = new UserServiceImpl();
         	if(userService.isUsernameTaken(username)) {
         		request.setAttribute("messages", List.of("Username already taken!"));
             	request.setAttribute("messageType", "error");
@@ -102,10 +102,10 @@ public class RegisterController extends HttpServlet {
         	
             User user = new User(name, address, nic, telephone, username, hashedPassword);
             
-            boolean registrationSuccessful = userService.registerUser(user);
+            boolean registrationSuccessful = userService.createUser(user);
 
             if (registrationSuccessful) {
-            	User userWithID = userService.getUserByUsername(username);
+            	User userWithID = userService.getUserDetails(username);
             	request.getSession().setAttribute("user", userWithID);
             	
                 response.sendRedirect(request.getContextPath() + "/");

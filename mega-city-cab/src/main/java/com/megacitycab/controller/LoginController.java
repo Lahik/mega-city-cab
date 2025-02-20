@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.megacitycab.model.User;
-import com.megacitycab.service.UserService;
+import com.megacitycab.service.UserServiceImpl;
 import com.megacitycab.util.PasswordHasher;
 import com.megacitycab.validation.UsernameValidator;
 
@@ -43,7 +43,7 @@ public class LoginController extends HttpServlet {
 		String username = request.getParameter("username").trim();
 	    String password = request.getParameter("password");
 
-	    UserService userService = new UserService();
+	    UserServiceImpl userService = new UserServiceImpl();
 	    UsernameValidator usernameValidator = new UsernameValidator();
 	    
 	    if(!usernameValidator.validate(username)) {
@@ -54,8 +54,8 @@ public class LoginController extends HttpServlet {
 	        return;
 	    }
 	    
-	    if(userService.loginAttempt(username, password)) {
-	    	User user = userService.getUserByUsername(username);
+	    if(userService.authenticateUser(username, password)) {
+	    	User user = userService.getUserDetails(username);
 	        request.getSession().setAttribute("user", user);
 
 	        response.sendRedirect(request.getContextPath() + "/");

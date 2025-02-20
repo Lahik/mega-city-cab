@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.megacitycab.model.User;
-import com.megacitycab.service.UserService;
+import com.megacitycab.service.UserServiceImpl;
 import com.megacitycab.util.PasswordHasher;
 import com.megacitycab.validation.PasswordValidator;
 
@@ -42,7 +42,7 @@ public class PasswordUpdateController extends HttpServlet {
         }
 
         User loggedInUser = (User) session.getAttribute("user");
-        UserService userService = new UserService();
+        UserServiceImpl userService = new UserServiceImpl();
         List<String> messages = new ArrayList<>();
         String messageType = "error";
         PasswordValidator passwordValidator = new PasswordValidator();
@@ -57,7 +57,7 @@ public class PasswordUpdateController extends HttpServlet {
             messages.add("Current password is incorrect!");
         } else {
             loggedInUser.setPassword(PasswordHasher.hashPassword(newPassword));
-            if (userService.updateUserPassword(loggedInUser)) {
+            if (userService.resetPassword(loggedInUser)) {
             	session.setAttribute("user", loggedInUser);
                 messages.add("Password updated successfully!");
                 messageType = "success";

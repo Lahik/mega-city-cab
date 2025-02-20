@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.megacitycab.model.User;
-import com.megacitycab.service.UserService;
+import com.megacitycab.service.UserServiceImpl;
 import com.megacitycab.service.ValidationService;
 import com.megacitycab.util.PasswordHasher;
 import com.megacitycab.validation.PasswordValidator;
@@ -62,7 +62,7 @@ public class ProfileController extends HttpServlet {
         List<String> errorMessages = new ArrayList<String>();
 
         ValidationService validationService = new ValidationService();
-        UserService userService = new UserService();
+        UserServiceImpl userService = new UserServiceImpl();
         
         if (!validationService.validate("nic", nic, null)) {
             errorMessages.add(validationService.getErrorMessage("nic"));
@@ -97,7 +97,7 @@ public class ProfileController extends HttpServlet {
             loggedInUser.setTelephone(telephone);
             loggedInUser.setUsername(username);
 
-            boolean updateSuccess = userService.updateUserProfile(loggedInUser);
+            boolean updateSuccess = userService.updateProfileInfo(loggedInUser);
 
             if (updateSuccess) {
                 session.setAttribute("user", loggedInUser);

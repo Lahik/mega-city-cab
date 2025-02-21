@@ -46,7 +46,7 @@
             	 if (session.getAttribute("user") != null) {
         	   %>
 		            <a href="<%= request.getContextPath() %>/profile" class="button btn1">Update Profile</a>
-		            <form action="<%= request.getContextPath() %>/logout" method="post" style="display:inline;">
+		            <form action="<%= request.getContextPath() %>/logout" method="POST" style="display:inline;">
                         <button type="submit" class="button btn2" onclick="return confirm('logout from this website?');">Logout</button>
                     </form>
 		       <%

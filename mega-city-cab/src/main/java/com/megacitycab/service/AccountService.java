@@ -5,6 +5,4 @@ public interface AccountService<T> {
     boolean authenticateUser(String username, String password);
     T getUserDetails(String username);
     boolean isUsernameTaken(String username, int id);
-    boolean updateProfileInfo(T entity);
-    boolean resetPassword(T entity);
 }

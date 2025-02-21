@@ -101,14 +101,14 @@ public class UserDAOImpl implements UserDAO{
     }
 
 	@Override
-    public boolean isUsernameTaken(String username, int userId) {
+    public boolean isUsernameTaken(String username, int id) {
         String query = "SELECT COUNT(*) FROM users WHERE username = ? AND id != ?";
         
         try (Connection conn = DBConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, username);
-            stmt.setInt(2, userId);
+            stmt.setInt(2, id);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {

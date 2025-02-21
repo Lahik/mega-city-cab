@@ -4,25 +4,5 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
-  <servlet>
-  	<servlet-name>AdminLoginController</servlet-name>
-  	<display-name>AdminLoginController</display-name>
-  	<description></description>
-  	<servlet-class>com.megacity.admin.controller.AdminLoginController</servlet-class>
-  </servlet>
-  <servlet>
-  	<servlet-name>AdminService</servlet-name>
-  	<display-name>AdminService</display-name>
-  	<description></description>
-  	<servlet-class>com.megacity.admin.service.AdminService</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>AdminLoginController</servlet-name>
-  	<url-pattern>/AdminLoginController</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-  	<servlet-name>AdminService</servlet-name>
-  	<url-pattern>/AdminService</url-pattern>
-  </servlet-mapping>
   
 </web-app>

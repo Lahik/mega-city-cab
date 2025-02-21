@@ -5,6 +5,4 @@ public interface AccountDAO<T> {
     boolean validateCredentials(String username, String password);
     T findUserByUsername(String username);
     boolean isUsernameTaken(String username, int id);
-    boolean updateUserDetails(T entity);
-    boolean changeUserPassword(T entity);
 }

@@ -4,4 +4,6 @@ import com.megacitycab.model.User;
 
 public interface UserDAO extends AccountDAO<User>{
 	boolean isUsernameTaken(String username);
+	boolean updateUserDetails(User entity);
+	boolean changeUserPassword(User entity);
 }

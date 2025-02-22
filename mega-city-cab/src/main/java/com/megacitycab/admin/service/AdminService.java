@@ -1,4 +1,4 @@
-package com.megacity.admin.service;
+package com.megacitycab.admin.service;
 
 import com.megacitycab.model.Admin;
 import com.megacitycab.service.AccountService;

@@ -1,5 +1,6 @@
-package com.megacity.admin.service;
+package com.megacitycab.admin.service;
 
+import com.megacitycab.admin.service.AdminServiceImpl;
 import com.megacitycab.model.Admin;
 import org.junit.Before;
 import org.junit.Test;

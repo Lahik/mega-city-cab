@@ -1,4 +1,4 @@
-package com.megacity.admin.dao;
+package com.megacitycab.admin.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,4 +1,4 @@
-package com.megacity.admin.dao;
+package com.megacitycab.admin.dao;
 
 import com.megacitycab.dao.AccountDAO;
 import com.megacitycab.model.Admin;

@@ -1,4 +1,4 @@
-package com.megacity.admin.controller;
+package com.megacitycab.admin.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,33 +8,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class AdminDashboardController
+ * Servlet implementation class AdminLogoutController
  */
-@WebServlet("/admin")
-public class AdminDashboardController extends HttpServlet {
+@WebServlet("/admin/logout")
+public class AdminLogoutController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminDashboardController() {
+    public AdminLogoutController() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/admin/dashboard.jsp").forward(request, response);
-	}
-
-	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		if (request.getSession(false) != null) {
+            request.getSession().invalidate();
+        }
+		
+        response.sendRedirect(request.getContextPath() + "/admin/login");
 	}
 
 }

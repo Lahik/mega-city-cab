@@ -1,5 +1,5 @@
-package com.megacity.admin.service;
-import com.megacity.admin.dao.AdminDAOImpl;
+package com.megacitycab.admin.service;
+import com.megacitycab.admin.dao.AdminDAOImpl;
 import com.megacitycab.model.Admin;
 
 public class AdminServiceImpl implements AdminService {

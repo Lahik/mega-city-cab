@@ -57,17 +57,17 @@ public class RegisterController extends HttpServlet {
         ValidationService validationService = new ValidationService();
         PasswordValidator passwordValidator = new PasswordValidator(); 
         
-        if (!validationService.validate("nic", nic, null)) {
+        if (!validationService.validate("nic", nic)) {
             errorMessages.add(validationService.getErrorMessage("nic"));
             isValid = false;
         }
 
-        if (!validationService.validate("telephone", telephone, null)) {
+        if (!validationService.validate("telephone", telephone)) {
             errorMessages.add(validationService.getErrorMessage("telephone"));
             isValid = false;
         }
 
-        if (!validationService.validate("username", username, null)) {
+        if (!validationService.validate("username", username)) {
             errorMessages.add(validationService.getErrorMessage("username"));
             isValid = false;
         }
@@ -77,8 +77,8 @@ public class RegisterController extends HttpServlet {
             isValid = false;
         }
 
-        if (!validationService.validate("sanitization", name, null) || 
-            !validationService.validate("sanitization", address, null)) {
+        if (!validationService.validate("sanitization", name) || 
+            !validationService.validate("sanitization", address)) {
             errorMessages.add(validationService.getErrorMessage("sanitization"));
             isValid = false;
         }

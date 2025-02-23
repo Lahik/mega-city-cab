@@ -18,8 +18,8 @@
 	<%
    		User user = (User) session.getAttribute("user");
    	%>
-    <div class="login-container update-profile">
-        <div class="login-box">
+    <div class="outter-box update-profile">
+        <div class="inner-box">
             <form action="<%= request.getContextPath() %>/profile" method="POST">
                 <h3>Update Profile Details</h3>
                 
@@ -48,7 +48,7 @@
             </form>
 		</div>
 
-		<div class="login-box">
+		<div class="inner-box">
             <form action="<%= request.getContextPath() %>/update-password" method="POST">
             	<h3>Update Password</h3>
             

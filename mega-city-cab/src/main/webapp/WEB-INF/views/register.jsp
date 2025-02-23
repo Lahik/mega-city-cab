@@ -14,8 +14,8 @@
 	<jsp:include page="/WEB-INF/components/toast.jsp" />
 	<jsp:include page="/WEB-INF/components/navbar.jsp" />
 	
-    <div class="login-container">
-        <div class="login-box">
+    <div class="outter-box">
+        <div class="inner-box">
             <form action="<%= request.getContextPath() %>/register" method="POST">
                 <h3>Register</h3>
                 

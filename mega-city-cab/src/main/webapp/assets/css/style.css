@@ -276,7 +276,7 @@ header {
     }
 }
 
-.login-container {
+.outter-box {
     width: 100%;
     height: 100vh;
     display: flex;
@@ -285,7 +285,7 @@ header {
     gap: 2rem;
     padding-inline: 10px;
 
-    .login-box {
+    .inner-box {
         width: 30rem;
         text-align: center;
         padding: 1rem 2rem;
@@ -319,12 +319,17 @@ header {
                 font-size: 1.2rem;
             }
 
-            input {
+            input, textarea {
                 width: 100%;
                 padding: 7px;
                 background-color: var(--gray-bg-dark);
                 font-size: 1rem;
                 border-radius: 4px;
+            }
+            
+            textarea {
+            	resize: none;
+            	outline: none;
             }
         }
 
@@ -387,17 +392,6 @@ header {
     -moz-user-select: none; 
     -ms-user-select: none; 
     user-select: none;
-
-    &::before {
-      position: absolute;
-      content: 'X';
-      top: .5rem;
-      right: 1rem;
-      color: gray;
-      background-color: #fff;
-      font-size: 1.1rem;
-      transform: scaleX(1.4);
-    }
 
     &::after {
         content: '';
@@ -510,7 +504,7 @@ header {
 	   }
  	}
  	
- 	.login-container {
+ 	.outter-box {
  		flex-direction: column;
  		margin-block: 100px;
  		min-height: 100vh;

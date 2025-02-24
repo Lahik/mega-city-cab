@@ -60,8 +60,8 @@ public class DriverUpdateController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    int id = Integer.parseInt(request.getParameter("id"));
-	    String name = request.getParameter("name");
-	    String licenseNumber = request.getParameter("license_number");
+	    String name = request.getParameter("name").trim();
+	    String licenseNumber = request.getParameter("license_number").trim();
 
 	    Driver updatedDriver = new Driver();
 	    updatedDriver.setId(id);

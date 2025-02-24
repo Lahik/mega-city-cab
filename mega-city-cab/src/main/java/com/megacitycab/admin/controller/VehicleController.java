@@ -10,21 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.megacitycab.admin.service.DriverServiceImpl;
-import com.megacitycab.model.Driver;
+import com.megacitycab.admin.service.VehicleServiceImpl;
+import com.megacitycab.model.Vehicle;
 
 /**
- * Servlet implementation class DriverController
+ * Servlet implementation class VehicleController
  */
-@WebServlet("/admin/drivers")
-public class DriverController extends HttpServlet {
+@WebServlet("/admin/vehicles")
+public class VehicleController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private DriverServiceImpl driverService = new DriverServiceImpl();
+	private VehicleServiceImpl vehicleService = new VehicleServiceImpl();
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DriverController() {
+    public VehicleController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,32 +33,31 @@ public class DriverController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Driver> drivers = driverService.getAllDrivers();
-		if (drivers == null) {
-		    drivers = new ArrayList<>();
+		List<Vehicle> vehicles = vehicleService.getAllVehicles();
+		if (vehicles == null){
+		    vehicles = new ArrayList<>();
 		}
-		request.setAttribute("drivers", drivers);
-		request.getRequestDispatcher("/WEB-INF/views/admin/drivers.jsp").forward(request, response);
+		request.setAttribute("vehicles", vehicles);
+		request.getRequestDispatcher("/WEB-INF/views/admin/vehicles.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String name = request.getParameter("name").trim();
-        String licenseNumber= request.getParameter("license_number").trim();
+		String vehicleNumber = request.getParameter("vehicle_number").trim();
+        String vehicleType = request.getParameter("vehicle_type").trim();
+        String seats = request.getParameter("seats").trim();
         
-        Driver driver = new Driver();
-        driver.setName(name);
-        driver.setLicenseNumber(licenseNumber);
+        Vehicle vehicle = new Vehicle(vehicleNumber, vehicleType, seats);
 
-        boolean success = driverService.addDriver(driver);
+        boolean success = vehicleService.addVehicle(vehicle);
 
         if (success) {
-            request.setAttribute("messages", List.of("Driver added successfully!"));
+            request.setAttribute("messages", List.of("Vehicle added successfully!"));
             request.setAttribute("messageType", "success");
         } else {
-            request.setAttribute("messages", List.of("Failed to add driver. Try again."));
+            request.setAttribute("messages", List.of("Failed to add Vehicle. Try again."));
             request.setAttribute("messageType", "error");
         }
         

@@ -3,12 +3,14 @@
 
    <section class="flex">
 
-      <a href="index.php" class="logo">Admin<span>Panel</span></a>
+      <a href="<%= request.getContextPath() %>/admin" class="logo">Admin<span>Panel</span></a>
 
       <nav class="navbar">
          <a href="<%= request.getContextPath() %>/admin">home</a>
-         <a href="<%= request.getContextPath() %>/bookings">bookings</a>
-         <a href="<%= request.getContextPath() %>/users">users</a>
+         <a href="<%= request.getContextPath() %>/admin/bookings">bookings</a>
+         <a href="<%= request.getContextPath() %>/admin/users">users</a>
+         <a href="<%= request.getContextPath() %>/admin/vehicles">vehicles</a>
+         <a href="<%= request.getContextPath() %>/admin/drivers">drivers</a>
       </nav>
 
       <div class="icons">

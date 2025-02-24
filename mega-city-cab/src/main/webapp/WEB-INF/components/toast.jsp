@@ -23,10 +23,10 @@ function show_toast(msg, type) {
     toast.classList.add("toast");
     toast.classList.add(type);
 
-    toast.addEventListener("click", function() {
+    toast.onClick = () => {
         toast.remove();
-    });
-
+    }
+    
     toast_box.appendChild(toast);
 
     setTimeout(()=>{

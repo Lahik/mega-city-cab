@@ -22,14 +22,14 @@
 	%>
       <form action="<%= request.getContextPath() %>/admin/profile" method="POST">
          <h3>update profile</h3>
-         <input type="text" minlength="4" value=<%= admin.getUsername() %> name="username" maxlength="20" class="box username">
+         <input type="text" minlength="4" value=<%= admin.getUsername() %> name="username" maxlength="20" class="box username" required>
          <input type="password" minlength="5" name="current_password" maxlength="20" placeholder="Enter your current password" class="box" required>
          <input type="password" minlength="5" name="new_password" maxlength="20" placeholder="Enter your new password" class="box" required>
          <input type="password" minlength="5" name="confirm_password" maxlength="20" placeholder="Confirm your new password" class="box" required>
          <input type="submit" value="update profile" name="submit" class="btn">
       </form>
 
-   	</section>
+   	</section> 
 	
 	<script src="<%= request.getContextPath() %>/assets/js/admin-script.js"></script>
 </body>

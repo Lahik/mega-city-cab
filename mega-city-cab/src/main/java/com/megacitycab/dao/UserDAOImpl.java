@@ -7,6 +7,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAOImpl implements UserDAO{
 
@@ -162,5 +165,43 @@ public class UserDAOImpl implements UserDAO{
             return false;
         }
     }
+
+	@Override
+	public List<User> getAllUsers() {
+		List<User> users = new ArrayList<>();
+        String query = "SELECT * FROM users";
+        try (Connection conn = DBConnectionFactory.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
+                users.add(new User(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("address"),
+                        rs.getString("nic"),
+                        rs.getString("telephone"),
+                        "",
+                        ""
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+	}
+
+	@Override
+	public void deleteUser(int id) {
+		String query = "DELETE FROM users WHERE id = ?";
+        try (Connection conn = DBConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+	}
 
 }

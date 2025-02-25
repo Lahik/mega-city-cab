@@ -4,15 +4,5 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
-  <servlet>
-  	<servlet-name>VehicleDeleteController</servlet-name>
-  	<display-name>VehicleDeleteController</display-name>
-  	<description></description>
-  	<servlet-class>com.megacitycab.admin.controller.VehicleDeleteController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>VehicleDeleteController</servlet-name>
-  	<url-pattern>/VehicleDeleteController</url-pattern>
-  </servlet-mapping>
   
 </web-app>

@@ -43,7 +43,7 @@
                             <th>Number</th>
                             <th>Type</th>
                             <th>Seats</th>
-                            <th>Manage</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>

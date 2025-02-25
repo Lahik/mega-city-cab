@@ -1,6 +1,9 @@
 package com.megacitycab.service;
 
 import com.megacitycab.model.User;
+
+import java.util.List;
+
 import com.megacitycab.dao.UserDAOImpl;
 
 public class UserServiceImpl implements UserService{
@@ -45,4 +48,14 @@ public class UserServiceImpl implements UserService{
     public boolean resetPassword(User user) {
     	return userDAO.changeUserPassword(user);
     }
+
+	@Override
+	public List<User> getAllUsers() {
+		return userDAO.getAllUsers();
+	}
+
+	@Override
+	public void deleteUser(int id) {
+		userDAO.deleteUser(id);
+	}
 }

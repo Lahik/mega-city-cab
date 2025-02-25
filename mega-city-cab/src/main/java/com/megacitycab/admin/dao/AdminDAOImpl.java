@@ -4,9 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.megacitycab.database.DBConnectionFactory;
 import com.megacitycab.model.Admin;
+import com.megacitycab.model.User;
 import com.megacitycab.util.PasswordHasher;
 
 public class AdminDAOImpl implements AdminDAO {
@@ -112,5 +116,39 @@ public class AdminDAOImpl implements AdminDAO {
 	            e.printStackTrace();
 	        }
 	        return false;
+	}
+
+	@Override
+	public List<Admin> getAllAdmins() {
+		List<Admin> admins = new ArrayList<>();
+        String query = "SELECT * FROM admins";
+        try (Connection conn = DBConnectionFactory.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
+                admins.add(new Admin(
+                        rs.getInt("id"),
+                        rs.getString("username"),
+                        rs.getString("password")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return admins;
+	}
+
+	@Override
+	public void deleteAdmin(int id) {
+		String query = "DELETE FROM admins WHERE id = ?";
+        try (Connection conn = DBConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 	}
 }

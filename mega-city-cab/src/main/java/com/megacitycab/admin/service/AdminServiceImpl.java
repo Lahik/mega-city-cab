@@ -1,4 +1,6 @@
 package com.megacitycab.admin.service;
+import java.util.List;
+
 import com.megacitycab.admin.dao.AdminDAOImpl;
 import com.megacitycab.model.Admin;
 
@@ -33,6 +35,16 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public boolean updateProfile(Admin admin) {
 		return adminDAO.updateAccount(admin);
+	}
+
+	@Override
+	public List<Admin> getAllAdmins() {
+		return adminDAO.getAllAdmins();
+	}
+
+	@Override
+	public void deleteAdmin(int id) {
+		adminDAO.deleteAdmin(id);
 	}
 
 }

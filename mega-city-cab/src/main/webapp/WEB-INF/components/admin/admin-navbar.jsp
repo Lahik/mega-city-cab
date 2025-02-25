@@ -8,6 +8,14 @@
       <nav class="navbar">
          <a href="<%= request.getContextPath() %>/admin">home</a>
          <a href="<%= request.getContextPath() %>/admin/bookings">bookings</a>
+         <%
+		    Admin admin = (Admin) session.getAttribute("admin"); 
+			if (admin.getId() == 1) {
+		 %>
+				<a href="<%= request.getContextPath() %>/admin/admins">admins</a>		 	
+		 <%
+			}
+		 %>
          <a href="<%= request.getContextPath() %>/admin/users">users</a>
          <a href="<%= request.getContextPath() %>/admin/vehicles">vehicles</a>
          <a href="<%= request.getContextPath() %>/admin/drivers">drivers</a>
@@ -19,22 +27,11 @@
       </div>
       
       <div class="profile">
-      	   <%
-          	 if (session.getAttribute("admin") != null) {
-          		Admin admin = (Admin) session.getAttribute("admin");
-      	   %>
-                <p><%= admin.getUsername() %></p>
-      	   <%
-               }
-          	 if (session.getAttribute("admin") != null) {
-      	   %>
+			<p><%= admin.getUsername() %></p>
             <a href="<%= request.getContextPath() %>/admin/profile" class="btn">Update Profile</a>
             <form action="<%= request.getContextPath() %>/admin/logout" method="POST" style="display:inline;">
                 <Button type="submit" class="delete-btn" onclick="return confirm('Logout as Admin?');">Logout</Button>
             </form>
-       	   <%
-               } 
-      	   %>
          </div>
 
    </section>

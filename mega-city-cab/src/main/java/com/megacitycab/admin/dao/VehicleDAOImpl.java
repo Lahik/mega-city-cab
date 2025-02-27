@@ -100,4 +100,29 @@ public class VehicleDAOImpl implements VehicleDAO {
             e.printStackTrace();
         }
     }
+    
+    @Override
+    public List<Vehicle> getVehiclesWithMinSeats(int seats) {
+        List<Vehicle> vehicles = new ArrayList<>();
+        String query = "SELECT * FROM vehicles WHERE no_of_seats >= ? ORDER BY no_of_seats ASC";
+        try (Connection conn = DBConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, seats);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    vehicles.add(new Vehicle(
+                            rs.getInt("id"),
+                            rs.getString("vehicle_number"),
+                            rs.getString("vehicle_type"),
+                            rs.getString("no_of_seats")
+                    ));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return vehicles;
+    }
+
 }

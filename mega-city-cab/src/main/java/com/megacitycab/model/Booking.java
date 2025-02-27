@@ -16,6 +16,30 @@ public class Booking {
     private String seats;
     private String message;
     
+    private User user;
+    private Driver driver;
+    private Vehicle vehicle;
+    
+    private int fare;
+    
+    public Booking() {}
+    
+	public Booking(int id, int customerId, Integer driverId, Integer vehicleId, String pickupLocation,
+			String destination, String bookingStatus, LocalDateTime bookingDateTime, Timestamp pickupDateTime,
+			String seats, String message, int fare) {
+		this.id = id;
+		this.customerId = customerId;
+		this.driverId = driverId;
+		this.vehicleId = vehicleId;
+		this.pickupLocation = pickupLocation;
+		this.destination = destination;
+		this.bookingStatus = bookingStatus;
+		this.bookingDateTime = bookingDateTime;
+		this.pickupDateTime = pickupDateTime;
+		this.seats = seats;
+		this.message = message;
+		this.fare = fare;
+	}
 	public int getId() {
 		return id;
 	}
@@ -81,5 +105,37 @@ public class Booking {
 	}
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Driver getDriver() {
+		return driver;
+	}
+
+	public void setDriver(Driver driver) {
+		this.driver = driver;
+	}
+
+	public Vehicle getVehicle() {
+		return vehicle;
+	}
+
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
+	}
+
+	public int getFare() {
+		return fare;
+	}
+
+	public void setFare(int fare) {
+		this.fare = fare;
 	}               
 }

@@ -1,12 +1,5 @@
-<%@page import="com.megacitycab.model.Admin"%>
-<%
-    Admin admin = (Admin) session.getAttribute("admin"); 
-	if (admin != null && admin.getId() != 1) {
-	    response.sendRedirect(request.getContextPath() + "/admin");
-	    return;
-	}
-%>
 <%@ include file="/WEB-INF/components/admin/check-admin-login.jsp" %>
+<%@ include file="/WEB-INF/components/admin/check-super-admin.jsp" %>
 <%@ include file="/WEB-INF/components/common-tags.jsp" %>
 <!DOCTYPE html>
 <html lang="en">

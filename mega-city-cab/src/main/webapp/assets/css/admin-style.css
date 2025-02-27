@@ -95,6 +95,14 @@ section {
    gap:1rem;
 }
 
+.heading {
+   text-align: center;
+   margin-bottom: 2rem;
+   text-transform: capitalize;
+   color:var(--black);
+   font-size: 3rem;
+}
+
 /* <Toast> */
 #toast_box {
    position: fixed;
@@ -264,6 +272,48 @@ section {
 }
 /* </header> */
 
+.box-container {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(27rem, 1fr));
+   gap:1rem;
+   align-items: flex-start;
+
+   .box {
+      text-align: center;
+      background-color:  #fff;
+      border:var(--border);
+      box-shadow: var(--box-shadow);
+      border-radius: .5rem;
+      text-align: center;
+      padding:1.5rem;
+
+      h3 {
+         font-size: 2.7rem;
+         color:var(--black);
+
+         span {
+            font-size: 2rem;
+         }
+      }
+
+      p {
+         padding:1.5rem;
+         border-radius: .5rem;
+         background-color: var(--light-bg);
+         border-radius: .5rem;
+         font-size: 1.8rem;
+         border:var(--border);
+         margin:1rem 0;
+         color:var(--light-color);
+      }
+      
+      a {
+      	white-space: nowrap;
+      	font-size: 1.6rem;
+      }
+   }
+}
+
 .form-container {
    display: flex;
    align-items: center;
@@ -278,6 +328,15 @@ section {
       padding:2rem;
       text-align: center;
       width: 50rem;
+      
+      .label-container {
+      	text-align: start;
+      
+      	label {
+	      	color: var(--black);
+	      	font-size: 2rem;
+      	}
+      }
 
       h3 {
          font-size: 2.5rem;
@@ -291,6 +350,26 @@ section {
          font-size: 2rem;
          color:var(--light-color);
       }
+      
+      .fare-calculated {
+      	text-align: start;
+      	border: var(--border);
+      	padding-left: 10px;
+      	border-radius: 5px;
+      	
+	    p {
+	   		font-size: 2rem;
+	   		color: var(--blue-color);
+	   		font-weight: bold;
+	   		margin-bottom: 10px;
+	   		
+	   		span {
+	   			text-transform: capitalize;
+	   			color: var(--black);
+	   			font-weight: 500;
+	   		}
+	   	}
+      }
 
       .box {
          width: 100%;
@@ -302,6 +381,15 @@ section {
          border:var(--border);
          font-size: 1.8rem;
          border-radius: .5rem;
+         
+         &.disabled {
+         	background-color: var(--light-bg); 
+		    color: var(light1); 
+		    border: none;
+		    cursor: not-allowed; 
+		    opacity: 0.6; 
+		    pointer-events: none; 
+         }
 
          &.username::placeholder {
             text-transform: capitalize;
@@ -390,7 +478,33 @@ section {
    }
 }
 
-
+.booking-container {
+	display: grid;
+    grid-template-columns: repeat(auto-fit, 37rem);
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1.5rem;
+    
+    .booking {
+    	padding: 1rem;
+    	border-radius: 4px;
+    	background-color: #fff;
+    	border: var(--border);
+    	
+    	p {
+    		font-size: 1.5rem;
+    		color: var(--blue-color);
+    		font-weight: bold;
+    		margin-bottom: 10px;
+    		
+    		span {
+    			text-transform: capitalize;
+    			color: var(--black);
+    			font-weight: 500;
+    		}
+    	}
+    }
+}
 
 
 

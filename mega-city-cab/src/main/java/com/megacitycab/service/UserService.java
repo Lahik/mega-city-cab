@@ -10,4 +10,5 @@ public interface UserService extends AccountService<User> {
     boolean resetPassword(User entity);
     List<User> getAllUsers();
     void deleteUser(int id);
+    User getUserById(int id);
 }

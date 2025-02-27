@@ -9,4 +9,5 @@ public interface VehicleService {
     List<Vehicle> getAllVehicles();
     void updateVehicle(Vehicle vehicle);
     void deleteVehicle(int id);
+    List<Vehicle> getVehiclesWithMinSeats(int seats);
 }

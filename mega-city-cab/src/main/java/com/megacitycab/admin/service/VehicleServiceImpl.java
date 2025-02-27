@@ -33,4 +33,11 @@ public class VehicleServiceImpl implements VehicleService{
     public void deleteVehicle(int id) {
         vehicleDAO.deleteVehicle(id);
     }
+
+	@Override
+	public List<Vehicle> getVehiclesWithMinSeats(int seats) {
+		return vehicleDAO.getVehiclesWithMinSeats(seats);
+	}
+    
+    
 }

@@ -10,4 +10,5 @@ public interface UserDAO extends AccountDAO<User>{
 	boolean changeUserPassword(User entity);
 	List<User> getAllUsers();
 	void deleteUser(int id);
+	User getUserById(int id);
 }

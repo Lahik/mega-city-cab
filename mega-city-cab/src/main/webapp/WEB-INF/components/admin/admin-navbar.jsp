@@ -7,10 +7,11 @@
 
       <nav class="navbar">
          <a href="<%= request.getContextPath() %>/admin">home</a>
-         <a href="<%= request.getContextPath() %>/admin/bookings">bookings</a>
+         <a href="<%= request.getContextPath() %>/admin/bookings?status=pending">bookings</a>
          <%
 		    Admin admin = (Admin) session.getAttribute("admin"); 
-			if (admin.getId() == 1) {
+         	boolean isSuperAdmin = admin.getId() == 1 ? true : false;
+			if (isSuperAdmin) {
 		 %>
 				<a href="<%= request.getContextPath() %>/admin/admins">admins</a>		 	
 		 <%
@@ -19,6 +20,12 @@
          <a href="<%= request.getContextPath() %>/admin/users">users</a>
          <a href="<%= request.getContextPath() %>/admin/vehicles">vehicles</a>
          <a href="<%= request.getContextPath() %>/admin/drivers">drivers</a>
+         <% if (isSuperAdmin) {
+		 %>
+				<a href="<%= request.getContextPath() %>/admin/fare">fare</a>		 	
+		 <%
+			}
+		 %>
       </nav>
 
       <div class="icons">

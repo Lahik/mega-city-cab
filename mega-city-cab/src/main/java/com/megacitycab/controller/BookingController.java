@@ -100,9 +100,7 @@ public class BookingController extends HttpServlet {
             boolean bookingSuccess = bookingService.createBooking(booking);
 
             if (bookingSuccess) {
-            	request.setAttribute("messages", List.of("Booking success!"));
-                request.setAttribute("messageType", "success");
-            	request.getRequestDispatcher("/WEB-INF/views/booking.jsp").forward(request, response);
+            	response.sendRedirect(request.getContextPath() + "/my-bookings");
             } else {
                 errorMessages.add("Booking could not be processed. Please try again.");
                 request.setAttribute("messages", errorMessages);

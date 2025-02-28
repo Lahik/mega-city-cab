@@ -40,6 +40,21 @@ public class Booking {
 		this.message = message;
 		this.fare = fare;
 	}
+	
+	public Booking(int id, String pickupLocation,
+			String destination, String bookingStatus, LocalDateTime bookingDateTime, Timestamp pickupDateTime,
+			String seats, String message, int fare) {
+		this.id = id;
+		this.pickupLocation = pickupLocation;
+		this.destination = destination;
+		this.bookingStatus = bookingStatus;
+		this.bookingDateTime = bookingDateTime;
+		this.pickupDateTime = pickupDateTime;
+		this.seats = seats;
+		this.message = message;
+		this.fare = fare;
+	}
+
 	public int getId() {
 		return id;
 	}

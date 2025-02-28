@@ -10,4 +10,5 @@ public interface BookingDAO {
     Booking getBookingById(int id);
     void declineBooking(int id);
     boolean assignBooking(Booking booking);
+    List<Booking> getBookingsByUserId(int id);
 }

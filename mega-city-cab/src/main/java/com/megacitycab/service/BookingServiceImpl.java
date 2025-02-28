@@ -37,4 +37,9 @@ public class BookingServiceImpl implements BookingService {
 	public boolean assignBooking(Booking booking) {
 		return bookingDAO.assignBooking(booking);
 	}
+
+	@Override
+	public List<Booking> getBookingsByUserId(int id) {
+		return bookingDAO.getBookingsByUserId(id);
+	}
 }

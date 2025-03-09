@@ -34,3 +34,14 @@ user.onclick = () => {
 window.onscroll = () => {
    profile.classList.remove('active');
 }
+
+window.onscroll = () => {
+    const screenWidth = window.innerWidth;
+    const scrollHeight = screenWidth < 480 ? 35 : 100;
+
+    if (window.scrollY >= scrollHeight) {
+        header.classList.add('nav-dark-bg');
+    } else {
+        header.classList.remove('nav-dark-bg');
+    }
+};

@@ -61,6 +61,8 @@
             <p>Already have an account? <a href="<%= request.getContextPath() %>/login">Login</a></p>
         </div>
     </div>
+    
+    <jsp:include page="/WEB-INF/components/footer.jsp" />
 
 	<script src="<%= request.getContextPath() %>/assets/js/script.js"></script>
 </body>

@@ -14,7 +14,7 @@
 	<jsp:include page="/WEB-INF/components/navbar.jsp" />
 	<jsp:include page="/WEB-INF/components/toast.jsp" />
 
-	<div class="outter-box" style="margin-top: 50px;">
+	<div class="outter-box">
         <div class="inner-box">
             <form action="<%= request.getContextPath() %>/booking" method="POST">
                 <h3>Book a Cab</h3>

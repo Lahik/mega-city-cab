@@ -15,7 +15,7 @@
 	<jsp:include page="/WEB-INF/components/navbar.jsp" />
 	<jsp:include page="/WEB-INF/components/toast.jsp" />
 
-	<div class="container" style="margin-top: 10rem;">
+	<div class="container">
    	
         <div class="booking-container">
             <c:forEach var="booking" items="${bookings}">

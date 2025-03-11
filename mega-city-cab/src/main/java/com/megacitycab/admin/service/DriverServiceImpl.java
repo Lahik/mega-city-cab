@@ -1,8 +1,9 @@
 package com.megacitycab.admin.service;
 
+import java.util.List;
+
 import com.megacitycab.admin.dao.DriverDAOImpl;
 import com.megacitycab.model.Driver;
-import java.util.List;
 
 public class DriverServiceImpl implements DriverService {
     

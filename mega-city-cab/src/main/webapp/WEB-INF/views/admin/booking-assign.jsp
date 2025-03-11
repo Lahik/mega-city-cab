@@ -1,7 +1,6 @@
 <%@page import="com.megacitycab.model.Driver"%>
 <%@page import="com.megacitycab.model.Vehicle"%>
 <%@page import="java.util.List"%>
-<%@ include file="/WEB-INF/components/admin/check-admin-login.jsp" %>
 <%@ include file="/WEB-INF/components/common-tags.jsp" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>

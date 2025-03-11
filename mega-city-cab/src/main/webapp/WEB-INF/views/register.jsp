@@ -1,4 +1,3 @@
-<%@ include file="/WEB-INF/components/redirect-if-logged-in.jsp" %>
 <%@ include file="/WEB-INF/components/common-tags.jsp" %>
 <!DOCTYPE html>
 <html lang="en">

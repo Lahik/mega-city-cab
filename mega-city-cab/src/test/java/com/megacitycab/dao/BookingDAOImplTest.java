@@ -1,12 +1,14 @@
 package com.megacitycab.dao;
 
-import com.megacitycab.model.Booking;
-import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import com.megacitycab.model.Booking;
 
 public class BookingDAOImplTest {
 

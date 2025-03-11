@@ -1,11 +1,15 @@
 package com.megacitycab.admin.dao;
 
-import com.megacitycab.model.Vehicle;
-import com.megacitycab.database.DBConnectionFactory;
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.megacitycab.database.DBConnectionFactory;
+import com.megacitycab.model.Vehicle;
 
 public class VehicleDAOImpl implements VehicleDAO {
 

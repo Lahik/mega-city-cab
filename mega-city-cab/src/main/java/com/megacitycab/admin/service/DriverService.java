@@ -1,7 +1,8 @@
 package com.megacitycab.admin.service;
 
-import com.megacitycab.model.Driver;
 import java.util.List;
+
+import com.megacitycab.model.Driver;
 
 public interface DriverService {
     boolean addDriver(Driver driver);

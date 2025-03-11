@@ -1,10 +1,9 @@
 package com.megacitycab.service;
 
-import com.megacitycab.model.User;
-
 import java.util.List;
 
 import com.megacitycab.dao.UserDAOImpl;
+import com.megacitycab.model.User;
 
 public class UserServiceImpl implements UserService{
     

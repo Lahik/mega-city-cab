@@ -1,5 +1,4 @@
 <%@ page import="com.megacitycab.model.User"%>
-<%@ include file="/WEB-INF/components/check-if-logged-in.jsp" %>
 <%@ include file="/WEB-INF/components/common-tags.jsp" %>
 <!DOCTYPE html>
 <html lang="en">

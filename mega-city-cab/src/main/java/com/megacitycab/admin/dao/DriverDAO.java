@@ -1,7 +1,8 @@
 package com.megacitycab.admin.dao;
 
-import com.megacitycab.model.Driver;
 import java.util.List;
+
+import com.megacitycab.model.Driver;
 
 public interface DriverDAO {
     boolean insertDriver(Driver driver);

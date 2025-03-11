@@ -1,4 +1,3 @@
-<%@ include file="/WEB-INF/components/check-if-logged-in.jsp" %>
 <%@ include file="/WEB-INF/components/common-tags.jsp" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>

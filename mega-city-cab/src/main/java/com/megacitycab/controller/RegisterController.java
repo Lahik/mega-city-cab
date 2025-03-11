@@ -14,6 +14,7 @@ import com.megacitycab.model.User;
 import com.megacitycab.service.UserServiceImpl;
 import com.megacitycab.service.ValidationService;
 import com.megacitycab.util.PasswordHasher;
+import com.megacitycab.util.UserSessionUtils;
 import com.megacitycab.validation.PasswordValidator;
 
 					/**
@@ -106,7 +107,7 @@ public class RegisterController extends HttpServlet {
 
             if (registrationSuccessful) {
             	User userWithID = userService.getUserDetails(username);
-            	request.getSession().setAttribute("user", userWithID);
+            	UserSessionUtils.setLoggedInUserInSession(request, userWithID);
             	
                 response.sendRedirect(request.getContextPath() + "/");
             } else {

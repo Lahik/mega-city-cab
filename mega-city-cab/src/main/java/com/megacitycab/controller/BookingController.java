@@ -15,13 +15,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.megacitycab.model.Booking;
 import com.megacitycab.model.User;
 import com.megacitycab.service.BookingServiceImpl;
 import com.megacitycab.service.ValidationService;
-import com.mysql.cj.Session;
+import com.megacitycab.util.UserSessionUtils;
 
 /**
  * Servlet implementation class BookingController
@@ -50,11 +49,11 @@ public class BookingController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("user") == null) {
-            response.sendRedirect(request.getContextPath() + "/login");
-            return;
-        }
+		User loggedInUser = UserSessionUtils.getLoggedInUser(request);
+		if (loggedInUser == null) {
+		    response.sendRedirect(request.getContextPath() + "/login");
+		    return;
+		}
         
 		String pickupLocation = request.getParameter("pickup_location").trim();
         String destination = request.getParameter("destination").trim();
@@ -86,7 +85,6 @@ public class BookingController extends HttpServlet {
         }
         
         if(isValid) {
-        	User loggedInUser = (User) session.getAttribute("user");
             int userId = loggedInUser.getId();
         	Booking booking = new Booking();
             booking.setCustomerId(userId);

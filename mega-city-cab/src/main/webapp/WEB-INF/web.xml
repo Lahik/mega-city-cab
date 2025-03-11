@@ -4,15 +4,24 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
-  <servlet>
-  	<servlet-name>MyBookingsController</servlet-name>
-  	<display-name>MyBookingsController</display-name>
+  <filter>
+  	<filter-name>UserSessionFilter</filter-name>
+  	<display-name>UserSessionFilter</display-name>
   	<description></description>
-  	<servlet-class>com.megacitycab.controller.MyBookingsController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>MyBookingsController</servlet-name>
-  	<url-pattern>/MyBookingsController</url-pattern>
-  </servlet-mapping>
-  
+  	<filter-class>com.megacitycab.filter.UserSessionFilter</filter-class>
+  </filter>
+  <filter>
+  	<filter-name>AdminSessionFilter</filter-name>
+  	<display-name>AdminSessionFilter</display-name>
+  	<description></description>
+  	<filter-class>com.megacitycab.filter.AdminSessionFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>UserSessionFilter</filter-name>
+  	<url-pattern>/UserSessionFilter</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+  	<filter-name>AdminSessionFilter</filter-name>
+  	<url-pattern>/AdminSessionFilter</url-pattern>
+  </filter-mapping>
 </web-app>

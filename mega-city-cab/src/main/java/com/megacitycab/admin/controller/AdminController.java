@@ -9,10 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.megacitycab.admin.service.AdminServiceImpl;
 import com.megacitycab.model.Admin;
+import com.megacitycab.util.AdminSessionUtils;
 import com.megacitycab.util.PasswordHasher;
 import com.megacitycab.validation.PasswordValidator;
 import com.megacitycab.validation.UsernameValidator;
@@ -49,13 +49,7 @@ public class AdminController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-        Admin sessionAdmin = (Admin) session.getAttribute("admin");
-
-        if (sessionAdmin == null || sessionAdmin.getId() != 1) {
-            response.sendRedirect(request.getContextPath() + "/admin");
-            return;
-        }
+        Admin sessionAdmin = AdminSessionUtils.getLoggedInAdmin(request);
 		
 		String username = request.getParameter("username").trim();
         String password = request.getParameter("password");
@@ -75,7 +69,7 @@ public class AdminController extends HttpServlet {
         }
         
         if (adminService.isUsernameTaken(username, sessionAdmin.getId()) || username.equals(sessionAdmin.getUsername())) {
-            setErrorAndForward(request, response, String.valueOf("Username already taken!"));
+            setErrorAndForward(request, response, "Username already taken!");
             return;
         }
 

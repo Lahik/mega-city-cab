@@ -9,11 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.megacitycab.model.User;
 import com.megacitycab.service.UserServiceImpl;
 import com.megacitycab.util.PasswordHasher;
+import com.megacitycab.util.UserSessionUtils;
 import com.megacitycab.validation.PasswordValidator;
 
 /**
@@ -35,13 +35,13 @@ public class PasswordUpdateController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("user") == null) {
+		User loggedInUser = UserSessionUtils.getLoggedInUser(request);
+        
+        if (loggedInUser == null) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
-
-        User loggedInUser = (User) session.getAttribute("user");
+        
         UserServiceImpl userService = new UserServiceImpl();
         List<String> messages = new ArrayList<>();
         String messageType = "error";
@@ -58,7 +58,7 @@ public class PasswordUpdateController extends HttpServlet {
         } else {
             loggedInUser.setPassword(PasswordHasher.hashPassword(newPassword));
             if (userService.resetPassword(loggedInUser)) {
-            	session.setAttribute("user", loggedInUser);
+            	UserSessionUtils.setLoggedInUserInSession(request, loggedInUser);
                 messages.add("Password updated successfully!");
                 messageType = "success";
             } else {

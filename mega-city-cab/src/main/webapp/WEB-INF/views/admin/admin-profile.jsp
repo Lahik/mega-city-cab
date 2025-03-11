@@ -1,5 +1,4 @@
 <%@ page import="com.megacitycab.model.Admin" %>
-<%@ include file="/WEB-INF/components/admin/check-admin-login.jsp" %>
 <%@ include file="/WEB-INF/components/common-tags.jsp" %>
 <!DOCTYPE html>
 <html lang="en">

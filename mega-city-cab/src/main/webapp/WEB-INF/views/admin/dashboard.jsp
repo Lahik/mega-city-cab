@@ -1,4 +1,3 @@
-<%@ include file="/WEB-INF/components/admin/check-admin-login.jsp" %>
 <%@ include file="/WEB-INF/components/common-tags.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,11 +50,13 @@
 	         <a href="<%= request.getContextPath() %>/admin/bookings?status=declined" class="btn">see declined bookings</a>
 	      </div>
 	      
-	      <div class="box">
-	         <h3>${userCount}</h3>
-	         <p>Users Registered</p>
-	         <a href="<%= request.getContextPath() %>/admin/users" class="btn">see users</a>
-	      </div>
+	      <% if (admin.getId() == 1) { %>
+		      <div class="box">
+		         <h3>${userCount}</h3>
+		         <p>Users Registered</p>
+		         <a href="<%= request.getContextPath() %>/admin/users" class="btn">see users</a>
+		      </div>
+	      <% } %>
 	      
 	      <div class="box">
 	         <h3>${driverCount}</h3>

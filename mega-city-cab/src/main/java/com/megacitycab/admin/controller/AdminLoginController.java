@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.megacitycab.admin.service.AdminServiceImpl;
 import com.megacitycab.model.Admin;
+import com.megacitycab.util.AdminSessionUtils;
 import com.megacitycab.validation.UsernameValidator;
 
 /**
@@ -55,7 +56,7 @@ public class AdminLoginController extends HttpServlet {
 	    
 	    if(adminService.authenticateUser(username, password)) {
 	    	Admin admin = adminService.getUserDetails(username);
-	        request.getSession().setAttribute("admin", admin);
+	    	AdminSessionUtils.setLoggedInAdminInSession(request, admin);
 
 	        response.sendRedirect(request.getContextPath() + "/admin");
 	    } else {

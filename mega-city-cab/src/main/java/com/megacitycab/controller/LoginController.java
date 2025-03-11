@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.megacitycab.model.User;
 import com.megacitycab.service.UserServiceImpl;
-import com.megacitycab.util.PasswordHasher;
+import com.megacitycab.util.UserSessionUtils;
 import com.megacitycab.validation.UsernameValidator;
 
 /**
@@ -56,7 +56,7 @@ public class LoginController extends HttpServlet {
 	    
 	    if(userService.authenticateUser(username, password)) {
 	    	User user = userService.getUserDetails(username);
-	        request.getSession().setAttribute("user", user);
+	        UserSessionUtils.setLoggedInUserInSession(request, user);
 
 	        response.sendRedirect(request.getContextPath() + "/");
 	    } else {

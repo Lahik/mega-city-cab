@@ -8,11 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.megacitycab.model.Booking;
 import com.megacitycab.model.User;
 import com.megacitycab.service.BookingServiceImpl;
+import com.megacitycab.util.UserSessionUtils;
 
 /**
  * Servlet implementation class MyBookingsController
@@ -34,20 +34,16 @@ public class MyBookingsController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-        
-        if (session != null) {
-            User user = (User) session.getAttribute("user");
-            
-            if (user != null) {
-                int userId = user.getId();
-                List<Booking> booking = bookingService.getBookingsByUserId(userId);
-                
-                request.setAttribute("bookings", booking);
-                request.getRequestDispatcher("/WEB-INF/views/my-bookings.jsp").forward(request, response);
-                return;
-            }
+        User loggedInUser = UserSessionUtils.getLoggedInUser(request);
+
+        if (loggedInUser != null) {
+            int userId = loggedInUser.getId();
+            List<Booking> bookings = bookingService.getBookingsByUserId(userId);
+
+            request.setAttribute("bookings", bookings);
+            request.getRequestDispatcher("/WEB-INF/views/my-bookings.jsp").forward(request, response);
+        } else {
+            response.sendRedirect(request.getContextPath() + "/login");
         }
-        response.sendRedirect(request.getContextPath() + "/login");
 	}
 }

@@ -9,13 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.megacitycab.model.User;
 import com.megacitycab.service.UserServiceImpl;
 import com.megacitycab.service.ValidationService;
-import com.megacitycab.util.PasswordHasher;
-import com.megacitycab.validation.PasswordValidator;
+import com.megacitycab.util.UserSessionUtils;
 
 /**
  * Servlet implementation class ProfileController
@@ -43,13 +41,13 @@ public class ProfileController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("user") == null) {
+        User loggedInUser = UserSessionUtils.getLoggedInUser(request);
+        
+        if (loggedInUser == null) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
-
-        User loggedInUser = (User) session.getAttribute("user");
+        
         int userId = loggedInUser.getId();
 		
 		String name = request.getParameter("name").trim();
@@ -100,7 +98,7 @@ public class ProfileController extends HttpServlet {
             boolean updateSuccess = userService.updateProfileInfo(loggedInUser);
 
             if (updateSuccess) {
-                session.setAttribute("user", loggedInUser);
+            	UserSessionUtils.setLoggedInUserInSession(request, loggedInUser);
                 request.setAttribute("messages", List.of("Profile updated successfully!"));
                 request.setAttribute("messageType", "success");
             } else {

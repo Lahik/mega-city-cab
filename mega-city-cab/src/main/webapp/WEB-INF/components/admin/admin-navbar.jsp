@@ -14,10 +14,10 @@
 			if (isSuperAdmin) {
 		 %>
 				<a href="<%= request.getContextPath() %>/admin/admins">admins</a>		 	
+		        <a href="<%= request.getContextPath() %>/admin/users">users</a>
 		 <%
 			}
 		 %>
-         <a href="<%= request.getContextPath() %>/admin/users">users</a>
          <a href="<%= request.getContextPath() %>/admin/vehicles">vehicles</a>
          <a href="<%= request.getContextPath() %>/admin/drivers">drivers</a>
          <% if (isSuperAdmin) {

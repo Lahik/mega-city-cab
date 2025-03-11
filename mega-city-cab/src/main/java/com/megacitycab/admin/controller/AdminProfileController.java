@@ -1,7 +1,6 @@
 package com.megacitycab.admin.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,13 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.megacitycab.admin.service.AdminServiceImpl;
 import com.megacitycab.model.Admin;
-import com.megacitycab.model.User;
-import com.megacitycab.service.UserServiceImpl;
-import com.megacitycab.service.ValidationService;
+import com.megacitycab.util.AdminSessionUtils;
 import com.megacitycab.util.PasswordHasher;
 import com.megacitycab.validation.PasswordValidator;
 import com.megacitycab.validation.UsernameValidator;
@@ -46,15 +42,9 @@ public class AdminProfileController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("admin") == null) {
-            response.sendRedirect(request.getContextPath() + "/admin/login");
-            return;
-        }
-
         AdminServiceImpl adminService = new AdminServiceImpl();
         
-        Admin loggedInAdmin = (Admin) session.getAttribute("admin");
+        Admin loggedInAdmin = AdminSessionUtils.getLoggedInAdmin(request);
         int adminId = loggedInAdmin.getId();
         
         String username = request.getParameter("username").trim();
@@ -86,7 +76,7 @@ public class AdminProfileController extends HttpServlet {
         }
         
         if (adminService.updateProfile(new Admin(adminId, username, newPassword))) {
-            session.setAttribute("admin", adminService.getUserDetails(username));
+        	AdminSessionUtils.setLoggedInAdminInSession(request, adminService.getUserDetails(username));
             request.setAttribute("messages", List.of("Profile updated successfully!"));
             request.setAttribute("messageType", "success");
             request.getRequestDispatcher("/WEB-INF/views/admin/admin-profile.jsp").forward(request, response);

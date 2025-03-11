@@ -1,7 +1,8 @@
 package com.megacitycab.admin.service;
 
-import com.megacitycab.model.Vehicle;
 import java.util.List;
+
+import com.megacitycab.model.Vehicle;
 
 public interface VehicleService {
     boolean addVehicle(Vehicle vehicle);

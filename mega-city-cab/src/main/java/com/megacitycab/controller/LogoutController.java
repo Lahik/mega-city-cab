@@ -1,11 +1,14 @@
 package com.megacitycab.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.megacitycab.util.UserSessionUtils;
 
 /**
  * Servlet implementation class LogoutController
@@ -26,10 +29,8 @@ public class LogoutController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (request.getSession(false) != null) {
-            request.getSession().invalidate();
-        }
-		
+		UserSessionUtils.invalidateSession(request);
+
         response.sendRedirect(request.getContextPath());
 	}
 

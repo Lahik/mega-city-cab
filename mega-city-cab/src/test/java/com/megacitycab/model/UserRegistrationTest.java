@@ -1,11 +1,18 @@
 package com.megacitycab.model;
 
-import static org.junit.Assert.*;
-import org.junit.Test;
-import com.megacitycab.database.DBConnectionFactory;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import org.junit.After;
 import org.junit.Before;
-import java.sql.*;
+import org.junit.Test;
+
+import com.megacitycab.database.DBConnectionFactory;
 
 public class UserRegistrationTest {
     

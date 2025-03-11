@@ -1,9 +1,3 @@
-<%
-    if (session != null && session.getAttribute("admin") != null) {
-        response.sendRedirect(request.getContextPath() + "/admin");
-        return;
-    }
-%>
 <%@ include file="/WEB-INF/components/common-tags.jsp" %>
 <!DOCTYPE html>
 <html lang="en">

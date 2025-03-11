@@ -1,10 +1,13 @@
 package com.megacitycab.admin.service;
 
-import com.megacitycab.admin.service.AdminServiceImpl;
-import com.megacitycab.model.Admin;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import com.megacitycab.model.Admin;
 
 public class AdminServiceTest {
 

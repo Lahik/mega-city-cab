@@ -1,6 +1,8 @@
 package com.megacitycab.database;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 

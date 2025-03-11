@@ -10,7 +10,6 @@ import java.util.List;
 
 import com.megacitycab.database.DBConnectionFactory;
 import com.megacitycab.model.Admin;
-import com.megacitycab.model.User;
 import com.megacitycab.util.PasswordHasher;
 
 public class AdminDAOImpl implements AdminDAO {

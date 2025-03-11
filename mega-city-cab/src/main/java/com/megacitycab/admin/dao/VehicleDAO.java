@@ -1,7 +1,8 @@
 package com.megacitycab.admin.dao;
 
-import com.megacitycab.model.Vehicle;
 import java.util.List;
+
+import com.megacitycab.model.Vehicle;
 
 public interface VehicleDAO {
     boolean addVehicle(Vehicle vehicle);

@@ -16,6 +16,7 @@
 	<div class="outter-box">
         <div class="inner-box">
             <form action="<%= request.getContextPath() %>/booking" method="POST">
+            	<jsp:include page="/WEB-INF/components/csrf-token.jsp" />
                 <h3>Book a Cab</h3>
                
                 <div class="input-container">

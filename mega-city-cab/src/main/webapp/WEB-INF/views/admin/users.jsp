@@ -40,6 +40,7 @@
 		                        	<div>
 			                        	<form action="<%= request.getContextPath() %>/admin/users/delete" method="POST" 
 			                        		onsubmit="return confirm('Are you sure you want to delete user ${user.name}?');">
+			                        		<jsp:include page="/WEB-INF/components/csrf-token.jsp" />
 			                        		<input type="hidden" name="id" value="${user.id}" />
 				                        	<button type="submit">
 				                        		<i class="ri-delete-bin-line delete"></i>

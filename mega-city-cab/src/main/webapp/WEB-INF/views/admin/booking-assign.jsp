@@ -18,6 +18,7 @@
 
    	<section class="form-container" style="min-height: 0;">
         <form action="<%= request.getContextPath() %>/admin/bookings/assign" method="POST">
+        	<jsp:include page="/WEB-INF/components/csrf-token.jsp" />
             <h3>Assign Booking</h3>
             
             <input type="hidden" name="booking_id" value="${bookingId}" />

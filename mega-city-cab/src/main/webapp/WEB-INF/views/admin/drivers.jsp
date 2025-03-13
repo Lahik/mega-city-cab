@@ -16,6 +16,7 @@
 	<section class="form-container" style="min-height: 0;">
 
 	     <form action="<%= request.getContextPath() %>/admin/drivers" method="POST">
+	     	<jsp:include page="/WEB-INF/components/csrf-token.jsp" />
 	        <h3>create a driver</h3>
 	        <input type="text" required minlength="3" name="name" placeholder="Enter the name" maxlength="25" class="box username">
 	        <input type="text" required minlength="3" name="license_number" placeholder="Enter the driver license number" maxlength="20" class="box username">
@@ -49,6 +50,7 @@
 			                        	</a>
 			                        	<form action="<%= request.getContextPath() %>/admin/drivers/delete" method="POST" 
 			                        		onsubmit="return confirm('Are you sure you want to delete driver ${driver.name}?');">
+			                        		<jsp:include page="/WEB-INF/components/csrf-token.jsp" />
 			                        		<input type="hidden" name="id" value="${driver.id}" />
 				                        	<button type="submit">
 				                        		<i class="ri-delete-bin-line delete"></i>

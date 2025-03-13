@@ -20,6 +20,7 @@
     <div class="outter-box update-profile">
         <div class="inner-box">
             <form action="<%= request.getContextPath() %>/profile" method="POST">
+            	<jsp:include page="/WEB-INF/components/csrf-token.jsp" />
                 <h3>Update Profile Details</h3>
                 
                     <div class="input-container">
@@ -49,6 +50,7 @@
 
 		<div class="inner-box">
             <form action="<%= request.getContextPath() %>/update-password" method="POST">
+            	<jsp:include page="/WEB-INF/components/csrf-token.jsp" />
             	<h3>Update Password</h3>
             
             	<div class="input-container">

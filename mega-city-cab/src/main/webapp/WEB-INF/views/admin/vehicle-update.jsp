@@ -15,6 +15,7 @@
 	
 	<section class="form-container">
 	     <form action="<%= request.getContextPath() %>/admin/vehicles/update?id=${vehicle.id}" method="POST">
+	     	<jsp:include page="/WEB-INF/components/csrf-token.jsp" />
 	        <h3>update vehicle</h3>
 	        <input type="text" required minlength="3" value="${vehicle.vehicleNumber}" name="vehicle_number" placeholder="Enter the vehicle number" maxlength="10" class="box username">
 	        

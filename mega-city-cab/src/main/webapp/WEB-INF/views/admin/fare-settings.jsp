@@ -15,6 +15,7 @@
 
 	<section class="form-container" style="min-height: 0;">
         <form action="<%= request.getContextPath() %>/admin/fare" method="POST">
+        	<jsp:include page="/WEB-INF/components/csrf-token.jsp" />
             <h3>Update Fare Settings</h3>
             
             <div class="label-container">

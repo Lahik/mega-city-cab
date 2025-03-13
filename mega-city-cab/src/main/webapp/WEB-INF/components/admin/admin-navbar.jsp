@@ -37,6 +37,7 @@
 			<p><%= admin.getUsername() %></p>
             <a href="<%= request.getContextPath() %>/admin/profile" class="btn">Update Profile</a>
             <form action="<%= request.getContextPath() %>/admin/logout" method="POST" style="display:inline;">
+            	<jsp:include page="/WEB-INF/components/csrf-token.jsp" />
                 <Button type="submit" class="delete-btn" onclick="return confirm('Logout as Admin?');">Logout</Button>
             </form>
          </div>

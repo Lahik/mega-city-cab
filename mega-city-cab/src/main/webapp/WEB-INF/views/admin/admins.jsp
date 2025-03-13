@@ -15,6 +15,7 @@
 
 	<section class="form-container" style="min-height: 0;">
 	     <form action="<%= request.getContextPath() %>/admin/admins" method="POST">
+	     	<jsp:include page="/WEB-INF/components/csrf-token.jsp" />
 	        <h3>create an admin</h3>
 	        <input type="text" required minlength="3" name="username" placeholder="Enter the username" maxlength="20" class="box username">
 	        <input type="password" minlength="5" name="password" maxlength="20" placeholder="Enter your password" class="box" required>
@@ -45,6 +46,7 @@
 			                        	<div>
 				                        	<form action="<%= request.getContextPath() %>/admin/admins/delete" method="POST" 
 				                        		onsubmit="return confirm('Are you sure you want to delete admin ${admin.username}?');">
+				                        		<jsp:include page="/WEB-INF/components/csrf-token.jsp" />
 				                        		<input type="hidden" name="id" value="${admin.id}" />
 					                        	<button type="submit">
 					                        		<i class="ri-delete-bin-line delete"></i>

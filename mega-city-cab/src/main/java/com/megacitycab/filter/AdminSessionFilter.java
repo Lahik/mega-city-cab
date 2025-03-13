@@ -12,19 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.megacitycab.util.AdminSessionUtils;
+import com.megacitycab.util.CSRFTokenUtil;
 
-@WebFilter(urlPatterns = {
-    "/admin/*",           
-    "/admin",              
-    "/admin/admins",       
-    "/admin/admins/*",     
-    "/admin/fare",         
-    "/admin/fare/*",
-    "/admin/fare",         
-    "/admin/fare/*",
-    "/admin/users",         
-    "/admin/users/*"
-})
+@WebFilter(urlPatterns = "/admin/*")
 public class AdminSessionFilter implements Filter {
 
     @Override
@@ -39,6 +29,11 @@ public class AdminSessionFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse) response;
 
         String requestURI = req.getServletPath();
+        
+        if (req.getMethod().equalsIgnoreCase("POST") && !CSRFTokenUtil.isValid(req)) {
+            resp.sendError(HttpServletResponse.SC_FORBIDDEN, "CSRF Token Invalid");
+            return;
+        }
 
         HttpSession session = req.getSession(false);
         boolean isAdminLoggedIn = (session != null && session.getAttribute("admin") != null);

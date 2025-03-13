@@ -20,6 +20,7 @@
 		Admin admin = (Admin) session.getAttribute("admin");	
 	%>
       <form action="<%= request.getContextPath() %>/admin/profile" method="POST">
+      	 <jsp:include page="/WEB-INF/components/csrf-token.jsp" />
          <h3>update profile</h3>
          <input type="text" minlength="4" value=<%= admin.getUsername() %> name="username" placeholder="Enter your username" maxlength="20" class="box username" required>
          <input type="password" minlength="5" name="current_password" maxlength="20" placeholder="Enter your current password" class="box" required>

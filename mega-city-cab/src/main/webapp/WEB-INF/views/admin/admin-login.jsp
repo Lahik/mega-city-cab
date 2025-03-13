@@ -15,6 +15,7 @@
 	<section class="form-container">
 
       <form action="<%= request.getContextPath() %>/admin/login" method="POST">
+      	 <jsp:include page="/WEB-INF/components/csrf-token.jsp" />
          <h3>admin login</h3>
          <input type="text" name="username" minlength="4" maxlength="20" value="${username}" required placeholder="Enter your username" class="box">
          <input type="password" name="password" minlength="5" maxlength="20" required placeholder="Enter your password" class="box">

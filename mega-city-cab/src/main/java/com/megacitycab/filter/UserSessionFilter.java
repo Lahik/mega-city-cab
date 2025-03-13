@@ -11,15 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter(urlPatterns = {
-    "/booking",           
-    "/profile",           
-    "/my-bookings",       
-    "/register",          
-    "/login",
-    "/update-password",
-    "/logout"
-})
+import com.megacitycab.util.CSRFTokenUtil;
+
+@WebFilter(urlPatterns = "/*")
 public class UserSessionFilter implements Filter {
 
     @Override
@@ -33,7 +27,18 @@ public class UserSessionFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         
+        // checks the url path is related to admin
+        if (req.getRequestURI().startsWith("/admin")) {
+            chain.doFilter(request, response);
+            return;
+        }
+        
         String requestURI = req.getServletPath();
+        
+        if (req.getMethod().equalsIgnoreCase("POST") && !CSRFTokenUtil.isValid(req)) {
+            resp.sendError(HttpServletResponse.SC_FORBIDDEN, "CSRF Token Invalid");
+            return;
+        }
         
         HttpSession session = req.getSession(false);
         boolean isUserLoggedIn = (session != null && session.getAttribute("user") != null);

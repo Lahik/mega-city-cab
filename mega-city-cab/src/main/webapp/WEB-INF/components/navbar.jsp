@@ -44,6 +44,7 @@
         	   %>
 		            <a href="<%= request.getContextPath() %>/profile" class="button btn1">Update Profile</a>
 		            <form action="<%= request.getContextPath() %>/logout" method="POST" style="display:inline;">
+		            	<jsp:include page="/WEB-INF/components/csrf-token.jsp" />
                         <button type="submit" class="button btn2" onclick="return confirm('logout from this website?');">Logout</button>
                     </form>
 		       <%

@@ -45,7 +45,7 @@ public class AdminServiceTest {
 
     @Test
     public void testIsUsernameTaken_NoUser() {
-        boolean isTaken = adminService.isUsernameTaken("admin123", 0);
+        boolean isTaken = adminService.isUsernameTaken("admin", 0);
         assertTrue(isTaken); 
     }
 }

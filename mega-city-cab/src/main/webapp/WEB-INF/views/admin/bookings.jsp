@@ -44,6 +44,7 @@
                     <c:if test="${booking.bookingStatus == 'pending'}">
 	                    <div class="flex-btn" style="justify-content: center">
 	                        <form action="<%= request.getContextPath() %>/admin/bookings/decline" method="POST">
+	                        	<jsp:include page="/WEB-INF/components/csrf-token.jsp" />
 	                            <input type="hidden" name="id" value="${booking.id}" />
 	                            <button type="submit" class="delete-btn" onclick="return confirm('Are you sure to decline booking number ${booking.id}?');">Decline</button>
 	                        </form>

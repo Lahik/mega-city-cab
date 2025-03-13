@@ -16,6 +16,7 @@
 	<section class="form-container" style="min-height: 0;">
 
 	     <form action="<%= request.getContextPath() %>/admin/vehicles" method="POST">
+	     	<jsp:include page="/WEB-INF/components/csrf-token.jsp" />
 	        <h3>create a vehicle</h3>
 	        <input type="text" required minlength="3" name="vehicle_number" placeholder="Enter the vehicle number" maxlength="10" class="box username">
 	        
@@ -59,6 +60,7 @@
 			                        	</a>
 			                        	<form action="<%= request.getContextPath() %>/admin/vehicles/delete" method="POST" 
 			                        		onsubmit="return confirm('Are you sure you want to delete vehicle ${vehicle.vehicleNumber}?');">
+			                        		<jsp:include page="/WEB-INF/components/csrf-token.jsp" />
 			                        		<input type="hidden" name="id" value="${vehicle.id}" />
 				                        	<button type="submit">
 				                        		<i class="ri-delete-bin-line delete"></i>

@@ -16,6 +16,7 @@
     <div class="outter-box">
         <div class="inner-box">
             <form action="<%= request.getContextPath() %>/login" method="POST">
+            	<jsp:include page="/WEB-INF/components/csrf-token.jsp" />
                 <h3>Login</h3>
                 
                 <div class="input-container">

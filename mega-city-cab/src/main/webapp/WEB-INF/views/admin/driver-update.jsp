@@ -15,6 +15,7 @@
 	
 	<section class="form-container">
 	     <form action="<%= request.getContextPath() %>/admin/drivers/update?id=${driver.id}" method="POST">
+	     	<jsp:include page="/WEB-INF/components/csrf-token.jsp" />
 	        <h3>update driver</h3>
 	        <input type="text" required minlength="3" value="${driver.name}" name="name" placeholder="Enter the name" maxlength="25" class="box">
 	        <input type="text" required minlength="3" value="${driver.licenseNumber}" name="license_number" placeholder="Enter the driver license number" maxlength="20" class="box">
